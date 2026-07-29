@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { headers } from "next/headers";
 import "./globals.css";
+import { SiteShell } from "./components/SiteShell";
 
 export async function generateMetadata(): Promise<Metadata> {
   const requestHeaders = await headers();
@@ -15,7 +16,10 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return {
     metadataBase: new URL(origin),
-    title: "MUMA Creative House | Creamos marcas líderes",
+    title: {
+      default: "MUMA Creative House | Creamos marcas líderes",
+      template: "%s | MUMA Creative House",
+    },
     description:
       "Transformamos marcas en referentes del mercado a través de estrategias diseñadas para vender.",
     keywords: [
@@ -69,7 +73,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body>{children}</body>
+      <body><SiteShell>{children}</SiteShell></body>
     </html>
   );
 }
