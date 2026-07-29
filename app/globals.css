@@ -137,6 +137,9 @@ a {
     radial-gradient(circle at 78% 85%, rgba(73, 48, 255, 0.98) 0, rgba(73, 48, 255, 0) 40%),
     radial-gradient(circle at 25% 88%, rgba(57, 232, 224, 0.98) 0, rgba(57, 232, 224, 0) 36%),
     linear-gradient(135deg, #a8f3d1 0%, #f3cd3d 24%, #f45bc0 53%, #652bff 78%, #4ce2d1 100%);
+  background-size: 145% 145%, 150% 150%, 140% 140%, 155% 155%, 130% 130%;
+  background-position: 0% 0%, 100% 0%, 100% 100%, 0% 100%, 50% 50%;
+  animation: holographic-flow 20s cubic-bezier(.45,.05,.55,.95) infinite alternate;
 }
 
 .grain::after {
@@ -151,6 +154,7 @@ a {
     repeating-radial-gradient(circle at 17% 32%, rgba(255,255,255,0.9) 0 0.65px, transparent 0.9px 3px),
     repeating-radial-gradient(circle at 83% 71%, rgba(0,0,0,0.8) 0 0.55px, transparent 0.8px 4px);
   background-size: 7px 7px, 9px 9px;
+  animation: grain-shift 0.7s steps(2, jump-none) infinite;
 }
 
 .hero {
@@ -297,6 +301,29 @@ a {
   to { transform: translate3d(40px, -25px, 0) scale(1.08); }
 }
 
+@keyframes holographic-flow {
+  0% {
+    background-position: 0% 6%, 100% 0%, 96% 100%, 4% 94%, 50% 50%;
+  }
+  32% {
+    background-position: 18% 22%, 82% 14%, 72% 84%, 25% 74%, 58% 42%;
+  }
+  67% {
+    background-position: 8% 58%, 96% 34%, 86% 68%, 12% 88%, 42% 58%;
+  }
+  100% {
+    background-position: 28% 10%, 72% 30%, 100% 78%, 32% 100%, 55% 45%;
+  }
+}
+
+@keyframes grain-shift {
+  0% { background-position: 0 0, 0 0; }
+  25% { background-position: 2px -3px, -4px 2px; }
+  50% { background-position: -3px 1px, 2px -4px; }
+  75% { background-position: 4px 3px, -2px -1px; }
+  100% { background-position: -1px -2px, 3px 4px; }
+}
+
 .section-pad {
   padding: clamp(90px, 11vw, 170px) clamp(20px, 6vw, 96px);
 }
@@ -431,6 +458,8 @@ a {
     radial-gradient(circle at 20% 18%, #e5ff42 0, transparent 35%),
     radial-gradient(circle at 90% 85%, #8f33ff 0, transparent 48%),
     linear-gradient(145deg, #56e6ba, #ff55af 62%, #5133ee);
+  background-size: 145% 145%, 150% 150%, 135% 135%;
+  animation: holographic-flow 15s ease-in-out infinite alternate-reverse;
 }
 
 .process-featured > * {
@@ -579,6 +608,8 @@ a {
   justify-content: center;
   text-align: center;
   color: #fff;
+  animation-duration: 24s;
+  animation-direction: alternate-reverse;
 }
 
 .statement p {
@@ -681,6 +712,7 @@ a {
   flex-direction: column;
   justify-content: space-between;
   color: #fff;
+  animation-duration: 27s;
 }
 
 .footer-top {
@@ -933,6 +965,8 @@ a {
     radial-gradient(circle at 15% 25%, #ffef43 0, transparent 33%),
     radial-gradient(circle at 85% 80%, #5334ff 0, transparent 48%),
     linear-gradient(140deg, #29d9cf, #ff46c7 62%, #6734ff);
+  background-size: 145% 145%, 150% 150%, 135% 135%;
+  animation: holographic-flow 17s ease-in-out infinite alternate;
 }
 
 .page-hero {
@@ -979,6 +1013,7 @@ a {
     radial-gradient(circle at 76% 26%, rgba(243,57,214,0.95) 0, transparent 36%),
     radial-gradient(circle at 70% 90%, rgba(54,35,255,0.98) 0, transparent 48%),
     linear-gradient(140deg, #45e4c2, #ff4fc6 56%, #5b2fff);
+  animation-duration: 18s;
 }
 
 .page-hero-services {
@@ -987,6 +1022,8 @@ a {
     radial-gradient(circle at 25% 74%, rgba(255,55,180,0.95) 0, transparent 38%),
     radial-gradient(circle at 88% 86%, rgba(74,45,255,0.98) 0, transparent 42%),
     linear-gradient(125deg, #29e3d2, #ffdc43 32%, #f536c7 62%, #5e31ff);
+  animation-duration: 22s;
+  animation-direction: alternate-reverse;
 }
 
 .conversion-band {
@@ -1389,5 +1426,12 @@ a {
   [data-reveal] {
     opacity: 1;
     transform: none;
+  }
+
+  .holographic,
+  .process-featured,
+  .service-card-marketing,
+  .grain::after {
+    animation: none !important;
   }
 }
