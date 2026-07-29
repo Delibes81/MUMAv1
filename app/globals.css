@@ -144,8 +144,12 @@ a {
     radial-gradient(circle at 25% 88%, rgba(57, 232, 224, 0.98) 0, rgba(57, 232, 224, 0) 36%),
     linear-gradient(135deg, #a8f3d1 0%, #f3cd3d 24%, #f45bc0 53%, #652bff 78%, #4ce2d1 100%);
   background-size: 145% 145%, 150% 150%, 140% 140%, 155% 155%, 130% 130%;
-  background-position: 0% 0%, 100% 0%, 100% 100%, 0% 100%, 50% 50%;
-  animation: holographic-flow 20s cubic-bezier(.45,.05,.55,.95) infinite alternate;
+  background-position:
+    calc(0% + var(--mouse-x)) calc(6% + var(--mouse-y)),
+    calc(100% + var(--mouse-x-reverse)) calc(0% + var(--mouse-y-reverse)),
+    calc(96% + var(--mouse-x)) calc(100% + var(--mouse-y-reverse)),
+    calc(4% + var(--mouse-x-reverse)) calc(94% + var(--mouse-y)),
+    50% 50%;
 }
 
 .holographic::before {
@@ -176,7 +180,6 @@ a {
   background-repeat: repeat;
   background-size: 256px 256px;
   filter: contrast(145%);
-  animation: grain-shift 0.22s steps(2, end) infinite;
 }
 
 .hero {
@@ -326,50 +329,6 @@ a {
   to { transform: translate3d(40px, -25px, 0) scale(1.08); }
 }
 
-@keyframes holographic-flow {
-  0% {
-    background-position:
-      calc(0% + var(--mouse-x)) calc(6% + var(--mouse-y)),
-      calc(100% + var(--mouse-x-reverse)) calc(0% + var(--mouse-y-reverse)),
-      calc(96% + var(--mouse-x)) calc(100% + var(--mouse-y-reverse)),
-      calc(4% + var(--mouse-x-reverse)) calc(94% + var(--mouse-y)),
-      50% 50%;
-  }
-  32% {
-    background-position:
-      calc(18% + var(--mouse-x)) calc(22% + var(--mouse-y)),
-      calc(82% + var(--mouse-x-reverse)) calc(14% + var(--mouse-y-reverse)),
-      calc(72% + var(--mouse-x)) calc(84% + var(--mouse-y-reverse)),
-      calc(25% + var(--mouse-x-reverse)) calc(74% + var(--mouse-y)),
-      58% 42%;
-  }
-  67% {
-    background-position:
-      calc(8% + var(--mouse-x)) calc(58% + var(--mouse-y)),
-      calc(96% + var(--mouse-x-reverse)) calc(34% + var(--mouse-y-reverse)),
-      calc(86% + var(--mouse-x)) calc(68% + var(--mouse-y-reverse)),
-      calc(12% + var(--mouse-x-reverse)) calc(88% + var(--mouse-y)),
-      42% 58%;
-  }
-  100% {
-    background-position:
-      calc(28% + var(--mouse-x)) calc(10% + var(--mouse-y)),
-      calc(72% + var(--mouse-x-reverse)) calc(30% + var(--mouse-y-reverse)),
-      calc(100% + var(--mouse-x)) calc(78% + var(--mouse-y-reverse)),
-      calc(32% + var(--mouse-x-reverse)) calc(100% + var(--mouse-y)),
-      55% 45%;
-  }
-}
-
-@keyframes grain-shift {
-  0% { background-position: 0 0; opacity: 0.26; }
-  20% { background-position: -71px 43px; opacity: 0.34; }
-  40% { background-position: 36px -82px; opacity: 0.28; }
-  60% { background-position: 91px 18px; opacity: 0.32; }
-  80% { background-position: -24px -59px; opacity: 0.27; }
-  100% { background-position: 54px 76px; opacity: 0.33; }
-}
-
 .section-pad {
   padding: clamp(90px, 11vw, 170px) clamp(20px, 6vw, 96px);
 }
@@ -505,7 +464,10 @@ a {
     radial-gradient(circle at 90% 85%, #8f33ff 0, transparent 48%),
     linear-gradient(145deg, #56e6ba, #ff55af 62%, #5133ee);
   background-size: 145% 145%, 150% 150%, 135% 135%;
-  animation: holographic-flow 15s ease-in-out infinite alternate-reverse;
+  background-position:
+    calc(0% + var(--mouse-x)) calc(8% + var(--mouse-y)),
+    calc(100% + var(--mouse-x-reverse)) calc(92% + var(--mouse-y-reverse)),
+    50% 50%;
 }
 
 .process-featured > * {
@@ -654,8 +616,6 @@ a {
   justify-content: center;
   text-align: center;
   color: #fff;
-  animation-duration: 24s;
-  animation-direction: alternate-reverse;
 }
 
 .statement p {
@@ -758,7 +718,6 @@ a {
   flex-direction: column;
   justify-content: space-between;
   color: #fff;
-  animation-duration: 27s;
 }
 
 .footer-top {
@@ -1012,7 +971,10 @@ a {
     radial-gradient(circle at 85% 80%, #5334ff 0, transparent 48%),
     linear-gradient(140deg, #29d9cf, #ff46c7 62%, #6734ff);
   background-size: 145% 145%, 150% 150%, 135% 135%;
-  animation: holographic-flow 17s ease-in-out infinite alternate;
+  background-position:
+    calc(0% + var(--mouse-x)) calc(12% + var(--mouse-y)),
+    calc(100% + var(--mouse-x-reverse)) calc(88% + var(--mouse-y-reverse)),
+    50% 50%;
 }
 
 .page-hero {
@@ -1059,7 +1021,6 @@ a {
     radial-gradient(circle at 76% 26%, rgba(243,57,214,0.95) 0, transparent 36%),
     radial-gradient(circle at 70% 90%, rgba(54,35,255,0.98) 0, transparent 48%),
     linear-gradient(140deg, #45e4c2, #ff4fc6 56%, #5b2fff);
-  animation-duration: 18s;
 }
 
 .page-hero-services {
@@ -1068,8 +1029,6 @@ a {
     radial-gradient(circle at 25% 74%, rgba(255,55,180,0.95) 0, transparent 38%),
     radial-gradient(circle at 88% 86%, rgba(74,45,255,0.98) 0, transparent 42%),
     linear-gradient(125deg, #29e3d2, #ffdc43 32%, #f536c7 62%, #5e31ff);
-  animation-duration: 22s;
-  animation-direction: alternate-reverse;
 }
 
 .conversion-band {

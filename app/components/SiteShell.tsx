@@ -65,8 +65,8 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
       currentX += (targetX - currentX) * 0.12;
       currentY += (targetY - currentY) * 0.12;
 
-      const offsetX = (currentX - 50) * 0.65;
-      const offsetY = (currentY - 50) * 0.5;
+      const offsetX = (currentX - 50) * 0.9;
+      const offsetY = (currentY - 50) * 0.7;
 
       root.style.setProperty("--pointer-x", `${currentX.toFixed(2)}%`);
       root.style.setProperty("--pointer-y", `${currentY.toFixed(2)}%`);
