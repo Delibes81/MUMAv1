@@ -1,4 +1,4 @@
-export const whatsappUrl = "https://w.app/muma-creative-house";
+export const whatsappUrl = "https://wa.me/521234567890"; // TODO: Cambiar por el número real
 
 export const pillars = [
   {
