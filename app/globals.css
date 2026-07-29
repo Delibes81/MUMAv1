@@ -9,6 +9,12 @@
   --cyan: #39e8e0;
   --yellow: #fff23f;
   --coral: #ff6b5e;
+  --pointer-x: 50%;
+  --pointer-y: 50%;
+  --mouse-x: 0px;
+  --mouse-y: 0px;
+  --mouse-x-reverse: 0px;
+  --mouse-y-reverse: 0px;
 }
 
 * {
@@ -142,19 +148,35 @@ a {
   animation: holographic-flow 20s cubic-bezier(.45,.05,.55,.95) infinite alternate;
 }
 
+.holographic::before {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  inset: -1px;
+  pointer-events: none;
+  background: radial-gradient(
+    circle 480px at var(--pointer-x) var(--pointer-y),
+    rgba(255, 255, 255, 0.34),
+    rgba(255, 255, 255, 0.08) 38%,
+    transparent 72%
+  );
+  mix-blend-mode: soft-light;
+  opacity: 0.9;
+}
+
 .grain::after {
   content: "";
   position: absolute;
   z-index: 3;
   inset: 0;
   pointer-events: none;
-  opacity: 0.2;
-  mix-blend-mode: soft-light;
-  background-image:
-    repeating-radial-gradient(circle at 17% 32%, rgba(255,255,255,0.9) 0 0.65px, transparent 0.9px 3px),
-    repeating-radial-gradient(circle at 83% 71%, rgba(0,0,0,0.8) 0 0.55px, transparent 0.8px 4px);
-  background-size: 7px 7px, 9px 9px;
-  animation: grain-shift 0.7s steps(2, jump-none) infinite;
+  opacity: 0.3;
+  mix-blend-mode: overlay;
+  background-image: url("/film-grain.png");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+  filter: contrast(145%);
+  animation: grain-shift 0.22s steps(2, end) infinite;
 }
 
 .hero {
@@ -169,11 +191,14 @@ a {
 .hero::before,
 .statement::before,
 .footer::before {
-  content: "";
-  position: absolute;
-  z-index: 0;
-  inset: 0;
-  background: rgba(15, 7, 30, 0.08);
+  background:
+    radial-gradient(
+      circle 520px at var(--pointer-x) var(--pointer-y),
+      rgba(255, 255, 255, 0.3),
+      transparent 70%
+    ),
+    linear-gradient(rgba(15, 7, 30, 0.08), rgba(15, 7, 30, 0.08));
+  mix-blend-mode: soft-light;
 }
 
 .hero > *,
@@ -303,25 +328,46 @@ a {
 
 @keyframes holographic-flow {
   0% {
-    background-position: 0% 6%, 100% 0%, 96% 100%, 4% 94%, 50% 50%;
+    background-position:
+      calc(0% + var(--mouse-x)) calc(6% + var(--mouse-y)),
+      calc(100% + var(--mouse-x-reverse)) calc(0% + var(--mouse-y-reverse)),
+      calc(96% + var(--mouse-x)) calc(100% + var(--mouse-y-reverse)),
+      calc(4% + var(--mouse-x-reverse)) calc(94% + var(--mouse-y)),
+      50% 50%;
   }
   32% {
-    background-position: 18% 22%, 82% 14%, 72% 84%, 25% 74%, 58% 42%;
+    background-position:
+      calc(18% + var(--mouse-x)) calc(22% + var(--mouse-y)),
+      calc(82% + var(--mouse-x-reverse)) calc(14% + var(--mouse-y-reverse)),
+      calc(72% + var(--mouse-x)) calc(84% + var(--mouse-y-reverse)),
+      calc(25% + var(--mouse-x-reverse)) calc(74% + var(--mouse-y)),
+      58% 42%;
   }
   67% {
-    background-position: 8% 58%, 96% 34%, 86% 68%, 12% 88%, 42% 58%;
+    background-position:
+      calc(8% + var(--mouse-x)) calc(58% + var(--mouse-y)),
+      calc(96% + var(--mouse-x-reverse)) calc(34% + var(--mouse-y-reverse)),
+      calc(86% + var(--mouse-x)) calc(68% + var(--mouse-y-reverse)),
+      calc(12% + var(--mouse-x-reverse)) calc(88% + var(--mouse-y)),
+      42% 58%;
   }
   100% {
-    background-position: 28% 10%, 72% 30%, 100% 78%, 32% 100%, 55% 45%;
+    background-position:
+      calc(28% + var(--mouse-x)) calc(10% + var(--mouse-y)),
+      calc(72% + var(--mouse-x-reverse)) calc(30% + var(--mouse-y-reverse)),
+      calc(100% + var(--mouse-x)) calc(78% + var(--mouse-y-reverse)),
+      calc(32% + var(--mouse-x-reverse)) calc(100% + var(--mouse-y)),
+      55% 45%;
   }
 }
 
 @keyframes grain-shift {
-  0% { background-position: 0 0, 0 0; }
-  25% { background-position: 2px -3px, -4px 2px; }
-  50% { background-position: -3px 1px, 2px -4px; }
-  75% { background-position: 4px 3px, -2px -1px; }
-  100% { background-position: -1px -2px, 3px 4px; }
+  0% { background-position: 0 0; opacity: 0.26; }
+  20% { background-position: -71px 43px; opacity: 0.34; }
+  40% { background-position: 36px -82px; opacity: 0.28; }
+  60% { background-position: 91px 18px; opacity: 0.32; }
+  80% { background-position: -24px -59px; opacity: 0.27; }
+  100% { background-position: 54px 76px; opacity: 0.33; }
 }
 
 .section-pad {

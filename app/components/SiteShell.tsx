@@ -46,6 +46,81 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
     return () => observer.disconnect();
   }, [pathname]);
 
+  useEffect(() => {
+    const finePointer = window.matchMedia("(pointer: fine)").matches;
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    if (!finePointer || reducedMotion) return;
+
+    const root = document.documentElement;
+    let animationFrame = 0;
+    let currentX = 50;
+    let currentY = 50;
+    let targetX = 50;
+    let targetY = 50;
+
+    const renderPointer = () => {
+      currentX += (targetX - currentX) * 0.12;
+      currentY += (targetY - currentY) * 0.12;
+
+      const offsetX = (currentX - 50) * 0.65;
+      const offsetY = (currentY - 50) * 0.5;
+
+      root.style.setProperty("--pointer-x", `${currentX.toFixed(2)}%`);
+      root.style.setProperty("--pointer-y", `${currentY.toFixed(2)}%`);
+      root.style.setProperty("--mouse-x", `${offsetX.toFixed(2)}px`);
+      root.style.setProperty("--mouse-y", `${offsetY.toFixed(2)}px`);
+      root.style.setProperty("--mouse-x-reverse", `${(-offsetX).toFixed(2)}px`);
+      root.style.setProperty("--mouse-y-reverse", `${(-offsetY).toFixed(2)}px`);
+
+      if (
+        Math.abs(targetX - currentX) > 0.02 ||
+        Math.abs(targetY - currentY) > 0.02
+      ) {
+        animationFrame = window.requestAnimationFrame(renderPointer);
+      } else {
+        animationFrame = 0;
+      }
+    };
+
+    const requestRender = () => {
+      if (!animationFrame) {
+        animationFrame = window.requestAnimationFrame(renderPointer);
+      }
+    };
+
+    const handlePointerMove = (event: PointerEvent) => {
+      targetX = (event.clientX / window.innerWidth) * 100;
+      targetY = (event.clientY / window.innerHeight) * 100;
+      requestRender();
+    };
+
+    const resetPointer = () => {
+      targetX = 50;
+      targetY = 50;
+      requestRender();
+    };
+
+    window.addEventListener("pointermove", handlePointerMove, { passive: true });
+    document.documentElement.addEventListener("mouseleave", resetPointer);
+
+    return () => {
+      window.removeEventListener("pointermove", handlePointerMove);
+      document.documentElement.removeEventListener("mouseleave", resetPointer);
+      window.cancelAnimationFrame(animationFrame);
+      [
+        "--pointer-x",
+        "--pointer-y",
+        "--mouse-x",
+        "--mouse-y",
+        "--mouse-x-reverse",
+        "--mouse-y-reverse",
+      ].forEach((property) => root.style.removeProperty(property));
+    };
+  }, []);
+
   return (
     <>
       <header className="site-header">
