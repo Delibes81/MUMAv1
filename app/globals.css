@@ -843,6 +843,7 @@ a {
 }
 
 .pillar-index a {
+  --pillar-hover: var(--acid);
   min-height: 190px;
   padding: 24px;
   display: grid;
@@ -853,10 +854,16 @@ a {
   transition: color 240ms ease, background 240ms ease;
 }
 
+.pillar-index a:nth-child(2) { --pillar-hover: var(--yellow); }
+.pillar-index a:nth-child(3) { --pillar-hover: #ff58d5; }
+.pillar-index a:nth-child(4) { --pillar-hover: var(--coral); }
+.pillar-index a:nth-child(5) { --pillar-hover: var(--cyan); }
+.pillar-index a:nth-child(6) { --pillar-hover: #9e73ff; }
+
 .pillar-index a:hover,
 .pillar-index a:focus-visible {
   color: var(--ink);
-  background: var(--acid);
+  background: var(--pillar-hover);
 }
 
 .pillar-index span {
