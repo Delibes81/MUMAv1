@@ -1,3 +1,4 @@
+import ArrowUpRight from "../components/ArrowUpRight";
 import type { Metadata } from "next";
 import { designServices, marketingServices, whatsappUrl } from "../data";
 
@@ -35,7 +36,7 @@ export default function ServicesPage() {
             </div>
             <ul>
               {designServices.map((service) => (
-                <li key={service}><span>{service}</span><span aria-hidden="true">↗</span></li>
+                <li key={service}><span>{service}</span><ArrowUpRight aria-hidden="true" /></li>
               ))}
             </ul>
           </article>
@@ -46,7 +47,7 @@ export default function ServicesPage() {
             </div>
             <ul>
               {marketingServices.map((service) => (
-                <li key={service}><span>{service}</span><span aria-hidden="true">↗</span></li>
+                <li key={service}><span>{service}</span><ArrowUpRight aria-hidden="true" /></li>
               ))}
             </ul>
           </article>
@@ -59,7 +60,7 @@ export default function ServicesPage() {
           <h2>Armemos la combinación que tu marca necesita.</h2>
         </div>
         <a className="button button-light" href={whatsappUrl} target="_blank" rel="noreferrer">
-          ¡Agenda una reunión de diagnóstico! <span aria-hidden="true">↗</span>
+          ¡Agenda una reunión de diagnóstico! <ArrowUpRight aria-hidden="true" />
         </a>
       </section>
     </main>

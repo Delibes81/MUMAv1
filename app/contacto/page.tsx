@@ -1,3 +1,4 @@
+import ArrowUpRight from "../components/ArrowUpRight";
 import type { Metadata } from "next";
 import { whatsappUrl } from "../data";
 
@@ -27,7 +28,7 @@ export default function ContactPage() {
           aria-label="Agendar una reunión de diagnóstico"
         >
           <span>¡Agenda una reunión<br />de diagnóstico!</span>
-          <b aria-hidden="true">↗</b>
+          <ArrowUpRight aria-hidden="true" />
         </a>
       </section>
 
@@ -40,17 +41,17 @@ export default function ContactPage() {
           <a href={whatsappUrl} target="_blank" rel="noreferrer" data-reveal>
             <small>WHATSAPP</small>
             <span>+52 55 35721488</span>
-            <b aria-hidden="true">↗</b>
+            <ArrowUpRight aria-hidden="true" />
           </a>
           <a href="mailto:info@mumach.com" data-reveal>
             <small>CORREO</small>
             <span>info@mumach.com</span>
-            <b aria-hidden="true">↗</b>
+            <ArrowUpRight aria-hidden="true" />
           </a>
           <a href="https://www.mumach.com" target="_blank" rel="noreferrer" data-reveal>
             <small>SITIO WEB</small>
             <span>www.mumach.com</span>
-            <b aria-hidden="true">↗</b>
+            <ArrowUpRight aria-hidden="true" />
           </a>
         </div>
         <p className="contact-note" data-reveal>

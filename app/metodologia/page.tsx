@@ -1,3 +1,4 @@
+import ArrowUpRight from "../components/ArrowUpRight";
 import type { Metadata } from "next";
 import { pillars, whatsappUrl } from "../data";
 
@@ -67,7 +68,7 @@ export default function MethodologyPage() {
             >
               <div className="pillar-top">
                 <span>{pillar.number}</span>
-                <span aria-hidden="true">↗</span>
+                <ArrowUpRight aria-hidden="true" />
               </div>
               <h3>{pillar.title}</h3>
               <ul>
@@ -84,7 +85,7 @@ export default function MethodologyPage() {
           <h2>Descubre en qué punto está tu marca.</h2>
         </div>
         <a className="button button-dark" href={whatsappUrl} target="_blank" rel="noreferrer">
-          ¡Agenda una reunión de diagnóstico! <span aria-hidden="true">↗</span>
+          ¡Agenda una reunión de diagnóstico! <ArrowUpRight aria-hidden="true" />
         </a>
       </section>
     </main>

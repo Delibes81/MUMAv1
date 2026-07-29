@@ -1,3 +1,4 @@
+import ArrowUpRight from "./components/ArrowUpRight";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { pillars, whatsappUrl } from "./data";
@@ -22,7 +23,7 @@ export default function Home() {
             </h2>
             <a className="button button-dark" href={whatsappUrl} target="_blank" rel="noreferrer">
               ¡Agenda una reunión de diagnóstico!
-              <span aria-hidden="true">↗</span>
+              <ArrowUpRight aria-hidden="true" />
             </a>
           </div>
         </div>
@@ -86,7 +87,7 @@ export default function Home() {
             <Link href="/metodologia" key={pillar.title} data-reveal>
               <span>{pillar.number}</span>
               <strong>{pillar.title}</strong>
-              <b aria-hidden="true">↗</b>
+              <ArrowUpRight aria-hidden="true" />
             </Link>
           ))}
         </div>
@@ -106,12 +107,12 @@ export default function Home() {
           <Link href="/servicios" className="home-service-card service-card-design" data-reveal>
             <span>01</span>
             <h3>Diseño e<br />Identidad</h3>
-            <b aria-hidden="true">↗</b>
+            <ArrowUpRight aria-hidden="true" />
           </Link>
           <Link href="/servicios" className="home-service-card service-card-marketing" data-reveal>
             <span>02</span>
             <h3>Marketing<br />y Medios</h3>
-            <b aria-hidden="true">↗</b>
+            <ArrowUpRight aria-hidden="true" />
           </Link>
         </div>
       </section>
@@ -120,7 +121,7 @@ export default function Home() {
         <p data-reveal>Tu marca no necesita hacer más ruido.</p>
         <h2 data-reveal>Necesita ser<br />inolvidable.</h2>
         <a className="button button-light" href={whatsappUrl} target="_blank" rel="noreferrer" data-reveal>
-          Hagámoslo realidad <span aria-hidden="true">↗</span>
+          Hagámoslo realidad <ArrowUpRight aria-hidden="true" />
         </a>
       </section>
     </main>

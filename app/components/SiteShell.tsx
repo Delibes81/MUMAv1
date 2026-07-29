@@ -211,7 +211,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
             aria-label="Agendar una reunión de diagnóstico"
           >
             <span>AGENDA UNA<br />REUNIÓN</span>
-            <b aria-hidden="true">↗</b>
+            <ArrowUpRight aria-hidden="true" />
           </a>
         </div>
         <div className="footer-contact">
