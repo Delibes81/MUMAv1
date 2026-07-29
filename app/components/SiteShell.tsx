@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 import { whatsappUrl } from "../data";
 
 const navigation = [
@@ -12,19 +12,12 @@ const navigation = [
   { href: "/contacto", label: "Contacto" },
 ];
 
-function Wordmark({
-  footer = false,
-  onNavigate,
-}: {
-  footer?: boolean;
-  onNavigate?: () => void;
-}) {
+function Wordmark({ footer = false }: { footer?: boolean }) {
   return (
     <Link
       className={`wordmark${footer ? " wordmark-footer" : ""}`}
       href="/"
       aria-label="MUMA Creative House, ir al inicio"
-      onClick={onNavigate}
     >
       <span>MUMA</span>
       <small>creative<br />house</small>
@@ -34,13 +27,8 @@ function Wordmark({
 
 export function SiteShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const [menuOpen, setMenuOpen] = useState(false);
-  const menuRef = useRef<HTMLElement>(null);
-  const menuButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    setMenuOpen(false);
-
     const elements = document.querySelectorAll<HTMLElement>("[data-reveal]");
     const observer = new IntersectionObserver(
       (entries) => {
@@ -57,46 +45,6 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
     elements.forEach((element) => observer.observe(element));
     return () => observer.disconnect();
   }, [pathname]);
-
-  useEffect(() => {
-    if (!menuOpen) return;
-
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-
-    const focusableElements = menuRef.current?.querySelectorAll<HTMLElement>(
-      "a[href], button:not([disabled])",
-    );
-    const firstFocusable = focusableElements?.[0];
-    const lastFocusable = focusableElements?.[focusableElements.length - 1];
-    const focusFrame = window.requestAnimationFrame(() => firstFocusable?.focus());
-
-    const handleMenuKeydown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setMenuOpen(false);
-        menuButtonRef.current?.focus();
-        return;
-      }
-
-      if (event.key !== "Tab" || !firstFocusable || !lastFocusable) return;
-
-      if (event.shiftKey && document.activeElement === firstFocusable) {
-        event.preventDefault();
-        lastFocusable.focus();
-      } else if (!event.shiftKey && document.activeElement === lastFocusable) {
-        event.preventDefault();
-        firstFocusable.focus();
-      }
-    };
-
-    window.addEventListener("keydown", handleMenuKeydown);
-
-    return () => {
-      window.cancelAnimationFrame(focusFrame);
-      window.removeEventListener("keydown", handleMenuKeydown);
-      document.body.style.overflow = previousOverflow;
-    };
-  }, [menuOpen]);
 
   useEffect(() => {
     const finePointer = window.matchMedia("(pointer: fine)").matches;
@@ -175,67 +123,22 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
 
   return (
     <>
-      <header className={`site-header${menuOpen ? " is-menu-open" : ""}`}>
-        <Wordmark onNavigate={() => setMenuOpen(false)} />
-        <span className="header-tagline" aria-hidden="true">
-          Estrategia · Diseño · Crecimiento
-        </span>
-        <button
-          ref={menuButtonRef}
-          className="menu-toggle"
-          type="button"
-          aria-expanded={menuOpen}
-          aria-controls="main-menu"
-          aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
-          onClick={() => setMenuOpen((open) => !open)}
-        >
-          <span>{menuOpen ? "Cerrar" : "Menú"}</span>
-          <span className="menu-toggle-icon" aria-hidden="true">
-            <i />
-            <i />
-          </span>
-        </button>
-
-        <nav
-          ref={menuRef}
-          id="main-menu"
-          className={`menu-overlay${menuOpen ? " is-open" : ""}`}
-          aria-label="Navegación principal"
-          aria-hidden={!menuOpen}
-        >
-          <div className="menu-overlay-glow" aria-hidden="true" />
-          <div className="menu-overlay-inner">
-            <span className="menu-eyebrow">Explora MUMA</span>
-            <div className="menu-links">
-              {navigation.map((item, index) => (
-                <Link
-                  href={item.href}
-                  key={item.href}
-                  tabIndex={menuOpen ? 0 : -1}
-                  aria-current={pathname === item.href ? "page" : undefined}
-                  style={{ "--menu-index": index } as React.CSSProperties}
-                  onClick={() => setMenuOpen(false)}
-                >
-                  <span>0{index + 1}</span>
-                  <strong>{item.label}</strong>
-                  <b aria-hidden="true">↗</b>
-                </Link>
-              ))}
-            </div>
-            <div className="menu-footer">
-              <span>Ciudad de México · MX</span>
-              <a
-                href={whatsappUrl}
-                target="_blank"
-                rel="noreferrer"
-                tabIndex={menuOpen ? 0 : -1}
-                onClick={() => setMenuOpen(false)}
-              >
-                Agenda una reunión <b aria-hidden="true">↗</b>
-              </a>
-            </div>
-          </div>
+      <header className="site-header">
+        <Wordmark />
+        <nav aria-label="Navegación principal">
+          {navigation.map((item) => (
+            <Link
+              href={item.href}
+              key={item.href}
+              aria-current={pathname === item.href ? "page" : undefined}
+            >
+              {item.label}
+            </Link>
+          ))}
         </nav>
+        <a className="header-cta" href={whatsappUrl} target="_blank" rel="noreferrer">
+          Hablemos
+        </a>
       </header>
 
       {children}
